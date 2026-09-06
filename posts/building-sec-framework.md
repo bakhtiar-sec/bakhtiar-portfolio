@@ -4,35 +4,45 @@ date: 2025-09-10
 summary: What building the v0.1 pipeline taught me about parsing, failure modes and designing for what comes next.
 tags: security-automation, python, secframe, learning-in-public
 ---
-**The problem: recon is repetitive**
+**The problem: security checks lived outside my automation**
 
-Every vulnerability assessment I practice in my lab starts the same way. Enumerate subdomains. Validate which hosts are alive. Scan the ports. Take notes. Repeat for the next target.
+In my day job, I'm an automation engineer — when something runs twice, it becomes a test. But my security practice was the opposite: manual scans, terminal output in one window, notes in another. DAST tools ran on demand and nobody, including me, could prove what was checked last week.
 
-As an automation engineer, this bothered me in a specific way. In my day job, when a manual step gets repeated more than twice, we automate it — declarative inputs, chained stages, machine-readable output, a report at the end. But my security workflow was a pile of terminal commands, copy-pasted output, and notes in a text file.
+SEC-FRAME is my fix: a security-testing framework where every check is a versioned, repeatable scenario — built on the stack I already know deeply, Playwright and TypeScript.
 
-So I applied my day-job discipline to my night-job interest, and SEC-FRAME was born: a small framework that chains recon → scanning → parsing → reporting into one unattended pipeline.
+**The design: security as BDD scenarios**
 
-**What v0.1 actually does**
+Each security check is a Gherkin scenario. A simplified idea of what that looks like:
 
-The design goal was simple: each stage is a wrapper around a proven tool, and every stage emits structured output that the next stage can consume. A run looks like this: python secframe.py --target example.com --stages recon,validate,scan,report — with the pipeline handling the glue: passing discovered subdomains into host validation, feeding live hosts into the scanner, and collecting everything into a single structured result instead of scattered terminal output.
+Given a registered target
+When the scan runner executes the active scanner
+Then findings are collected, deduplicated, and reported
+
+The scenario format forces a useful kind of honesty: every check has an explicit precondition, action, and expected outcome. Non-security reviewers can read the feature files and understand exactly what the pipeline verifies — no translation layer needed.
+
+**Under the hood**
+
+- ScannerRunner and ZapRunner orchestrate OWASP ZAP, the open-source DAST scanner, against the configured target
+- An ApiClient layer handles API-level checks alongside browser-driven flows
+- A GitHub Actions workflow runs the suite on every push — the scan happens whether or not I remember to run it
 
 **Four things v0.1 taught me**
 
-1. Wrapping a tool is easy. Parsing its output is the real work. Normalizing each tool's output into structured data (JSON) was 80% of the effort — and 100% worth it, because it's what makes chaining possible at all.
+1. Wrapping a scanner is easy. Normalizing its output is the real work. ZAP's alerts needed to become structured data before anything downstream — reports, thresholds, deduplication — could exist.
 
-2. A pipeline must fail loudly. Early on, a failed stage silently passed empty results forward, and the final report looked plausible while being wrong. That's the worst failure mode in security tooling: confident nonsense. Now every stage returns an explicit status, and a failed stage halts the pipeline with context.
+2. A pipeline must fail loudly. An early version could finish "green" while the scanner silently produced zero findings. A security pipeline that hides empty results is worse than no pipeline: confident nonsense. Every stage now returns explicit status, and missing findings block the build.
 
-3. Structured intermediate formats pay for themselves. The temptation is to pass raw text between stages. Resist it. When v0.2 needed CVSS scoring, I was glad every stage already spoke JSON — adding a stage became an afternoon, not a rewrite.
+3. BDD is a communication tool, not just syntax. Writing security intent as scenarios exposed gaps in my own thinking — checks that sounded complete until I had to state the expected outcome precisely.
 
-4. Be a polite scanner. Rate limits, built-in delays, and scope checks aren't optional extras. A framework that automates scanning must make it easy to stay within authorized targets — that's a design requirement, not a nice-to-have.
+4. CI is the actual product. The framework's value isn't the scan itself; it's that the scan runs on every push, unattended, forever. Automation only counts when nobody has to remember to trigger it.
 
 **What SEC-FRAME is not**
 
-Honesty section, because this is learning-in-public: v0.1 is a small framework built for my own lab practice. It is not a replacement for mature professional tooling, and it doesn't try to be. The value is in the construction — designing pipelines, handling edge cases, and thinking about how automation changes a workflow. Those skills transfer directly to real security-automation work.
+Honesty section, because this is learning-in-public: v0.1 is a small framework built for my own lab practice. It is not a replacement for mature scanning products, and it doesn't try to be. The value is in the construction — pipeline design, output normalization, failure handling — and those skills transfer directly to real security-automation work.
 
 **What's next**
 
-v0.2 (in development): CVSS scoring and HTML/PDF report generation. v0.3 (planned): CI/CD integration, so scans run as part of a DevSecOps pipeline.
+v0.2 (in development): CVSS scoring and structured report generation. v0.3 (planned): scheduled scans and alerting from CI.
 
 Source lives on GitHub — feedback and "you did this the hard way, try X" comments are all welcome. That's the point of building in public.
 
