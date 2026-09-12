@@ -108,10 +108,10 @@ body.post-open #postView{display:block}
 
 /* HUD corner brackets */
 .corner{position:fixed;width:26px;height:26px;z-index:899;pointer-events:none;opacity:.55}
-.corner.tl{top:10px;left:10px;border-top:1px solid var(--green);border-left:1px solid var(--green)}
-.corner.tr{top:10px;right:10px;border-top:1px solid var(--green);border-right:1px solid var(--green)}
-.corner.bl{bottom:10px;left:10px;border-bottom:1px solid var(--green);border-left:1px solid var(--green)}
-.corner.br{bottom:10px;right:10px;border-bottom:1px solid var(--green);border-right:1px solid var(--green)}
+.corner.tl{top:10px;left:10px;border-top:1px solid rgba(201,214,227,.25);border-left:1px solid rgba(201,214,227,.25)}
+.corner.tr{top:10px;right:10px;border-top:1px solid rgba(201,214,227,.25);border-right:1px solid rgba(201,214,227,.25)}
+.corner.bl{bottom:10px;left:10px;border-bottom:1px solid rgba(201,214,227,.25);border-left:1px solid rgba(201,214,227,.25)}
+.corner.br{bottom:10px;right:10px;border-bottom:1px solid rgba(201,214,227,.25);border-right:1px solid rgba(201,214,227,.25)}
 
 /* scanline sweep + rails */
 #sweep{position:fixed;left:0;right:0;top:-15%;height:14vh;z-index:996;pointer-events:none;
@@ -119,10 +119,10 @@ background:linear-gradient(to bottom,transparent,rgba(239,35,60,.05) 40%,rgba(58
 animation:sweep 9s linear infinite}
 @keyframes sweep{from{top:-15%}to{top:115%}}
 .rail{position:fixed;top:0;bottom:0;width:1px;z-index:2;pointer-events:none;
-background:linear-gradient(180deg,transparent,rgba(239,35,60,.22) 30%,rgba(58,160,255,.22) 70%,transparent)}
+background:linear-gradient(180deg,transparent,rgba(201,214,227,.14) 30%,rgba(201,214,227,.14) 70%,transparent)}
 .rail.l{left:16px}.rail.r{right:16px}
 .rail::after{content:'';position:absolute;left:-2.5px;width:6px;height:70px;border-radius:4px;
-background:linear-gradient(180deg,transparent,var(--green),transparent);opacity:.7;animation:raildrop 6s linear infinite}
+background:linear-gradient(180deg,transparent,var(--green),transparent);opacity:.4;animation:raildrop 6s linear infinite}
 .rail.r::after{animation-delay:-3s}
 @keyframes raildrop{0%{top:-12%}100%{top:105%}}
 @media(max-width:860px){.rail{display:none}}
@@ -133,7 +133,8 @@ background:linear-gradient(180deg,transparent,var(--green),transparent);opacity:
 .hud-item{display:flex;flex-direction:column;gap:2px;padding-left:10px;border-left:1px solid var(--line)}
 .hud-item span{font-size:.58rem;letter-spacing:2px;color:var(--muted)}
 .hud-item b{font-size:.68rem;color:var(--cyan);font-weight:500;white-space:nowrap}
-.hud-item b.ok{color:var(--green)}
+.hud-item b.ok{color:var(--cyan)}
+.hud-item b.ok .pulse{background:var(--cyan)}
 .pulse{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite}
 .badge .pulse{background:var(--green)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(239,35,60,.5)}70%{box-shadow:0 0 0 10px rgba(239,35,60,0)}100%{box-shadow:0 0 0 0 rgba(239,35,60,0)}}
@@ -184,8 +185,9 @@ nav.scrolled{background:rgba(7,11,18,.88);backdrop-filter:blur(12px);border-bott
 @keyframes blink{50%{opacity:0}}
 .nav-links{display:flex;gap:22px;list-style:none;margin-left:auto}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.5px;transition:.2s}
-.nav-links a b{color:var(--green);font-weight:400;margin-right:3px}
+.nav-links a b{color:var(--muted);font-weight:400;margin-right:3px}
 .nav-links a:hover,.nav-links a.active{color:var(--green);text-shadow:0 0 12px rgba(239,35,60,.5)}
+.nav-links a:hover b,.nav-links a.active b{color:var(--green)}
 .nav-right{display:flex;align-items:center;gap:14px}
 .nav-clock{font-size:.72rem;color:var(--cyan);letter-spacing:1px;white-space:nowrap}
 .sfx{font-family:var(--mono);font-size:.62rem;letter-spacing:1px;color:var(--muted);background:rgba(239,35,60,.04);border:1px solid var(--line);padding:6px 10px;border-radius:6px;cursor:pointer;transition:.2s}
@@ -212,7 +214,8 @@ background-size:44px 44px;transform:perspective(420px) rotateX(62deg);animation:
 .badge{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:rgba(239,35,60,.06);color:var(--green);font-size:.72rem;font-weight:600;letter-spacing:2px;padding:7px 16px;border-radius:4px;margin-bottom:22px;animation:flicker 6s infinite;
 clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
 @keyframes flicker{0%,100%{opacity:1}91%{opacity:1}92%{opacity:.55}93%{opacity:1}96%{opacity:.75}97%{opacity:1}}
-.glitch{font-family:var(--head);font-weight:900;font-size:clamp(2rem,4.5vw,3.6rem);letter-spacing:2px;line-height:1.12;margin-bottom:16px;position:relative;z-index:0;
+.hero-byline{font-size:.82rem;color:var(--muted);letter-spacing:2px;margin-bottom:8px}
+.glitch{font-family:var(--head);font-weight:800;font-size:clamp(1.3rem,2.6vw,2.1rem);letter-spacing:1.5px;line-height:1.16;margin-bottom:14px;position:relative;z-index:0;
 background:linear-gradient(90deg,#fdf6ec,var(--cyan),#fdf6ec);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradmove 5s linear infinite}
 @keyframes gradmove{to{background-position:200% center}}
 .glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;overflow:hidden;background:none;-webkit-background-clip:initial;color:var(--cyan)}
@@ -220,13 +223,13 @@ background:linear-gradient(90deg,#fdf6ec,var(--cyan),#fdf6ec);background-size:20
 .glitch::after{z-index:-2;animation:gl2 2.6s infinite linear alternate-reverse;opacity:.35;color:var(--mag)}
 @keyframes gl1{0%{clip-path:inset(0 0 92% 0);transform:translate(-3px,-2px)}25%{clip-path:inset(28% 0 58% 0);transform:translate(3px,1px)}50%{clip-path:inset(62% 0 26% 0);transform:translate(-2px,2px)}75%{clip-path:inset(80% 0 6% 0);transform:translate(2px,-1px)}100%{clip-path:inset(40% 0 44% 0);transform:translate(-3px,1px)}}
 @keyframes gl2{0%{clip-path:inset(65% 0 20% 0);transform:translate(3px,2px)}25%{clip-path:inset(10% 0 78% 0);transform:translate(-3px,-1px)}50%{clip-path:inset(45% 0 40% 0);transform:translate(2px,2px)}75%{clip-path:inset(85% 0 4% 0);transform:translate(-2px,-2px)}100%{clip-path:inset(20% 0 68% 0);transform:translate(3px,1px)}}
-.tw-line{color:var(--cyan);font-size:clamp(.95rem,2vw,1.2rem);margin-bottom:20px;min-height:1.6em}
+.tw-line{color:#fdf6ec;font-weight:600;font-size:clamp(1.1rem,2.6vw,1.5rem);margin-bottom:22px;min-height:1.6em}
 .tw-line .p{color:var(--green)}
 .tw-cursor{display:inline-block;width:10px;height:1.05em;background:var(--green);vertical-align:text-bottom;margin-left:4px;animation:blink 1s steps(1) infinite;box-shadow:0 0 10px var(--green)}
-.hero-sub{color:var(--muted);font-size:.92rem;max-width:540px;margin-bottom:30px}
+.hero-sub{color:var(--muted);font-size:.98rem;max-width:560px;margin-bottom:30px}
 .hero-sub b{color:var(--text);font-weight:500}
 .btn-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
-.btn{font-family:var(--mono);font-size:.85rem;padding:.85rem 1.7rem;border:1px solid var(--green);color:var(--green);background:rgba(239,35,60,.05);cursor:pointer;transition:.2s;letter-spacing:1px;text-decoration:none;display:inline-block;
+.btn{font-family:var(--mono);font-size:.85rem;padding:.85rem 1.7rem;border:1px solid rgba(201,214,227,.25);color:var(--text);background:rgba(255,255,255,.02);cursor:pointer;transition:.2s;letter-spacing:1px;text-decoration:none;display:inline-block;
 clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
 .btn:hover{color:var(--cyan);border-color:var(--cyan);background:rgba(58,160,255,.09);filter:drop-shadow(0 0 14px rgba(58,160,255,.45))}
 .btn.solid{background:var(--cyan);color:#04101d;font-weight:700;border-color:var(--cyan)}
@@ -259,22 +262,22 @@ clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 
 .ht-line{margin-bottom:4px;word-break:break-word}
 .ht-cmd{color:#fdf6ec}
 .ht-out{color:#8fa3b8;padding-left:2px;margin-bottom:2px;white-space:pre-wrap}
-.ht-out.ok{color:var(--green)}
+.ht-out.ok{color:var(--cyan)}
 .typing::after{content:'▋';color:var(--green);margin-left:2px;animation:blink 1s steps(1) infinite}
 
 /* marquee */
 .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:13px 0;background:rgba(58,160,255,.02);position:relative;z-index:1}
 .marquee-track{display:flex;gap:46px;width:max-content;animation:mscroll 34s linear infinite;color:var(--muted);font-size:.8rem;letter-spacing:3px;white-space:nowrap}
-.marquee-track span i{color:var(--green);font-style:normal;margin-left:46px}
-.marquee-track span:nth-child(even){color:var(--cyan)}
+.marquee-track span i{color:var(--muted);font-style:normal;margin-left:46px}
+.marquee-track span:nth-child(even){color:var(--muted)}
 @keyframes mscroll{to{transform:translateX(-50%)}}
 
 /* section heads */
 .sec-head{margin-bottom:48px}
-.sec-tag{color:var(--green);font-size:.85rem}
+.sec-tag{color:var(--muted);font-size:.85rem}
 .sec-head h2{font-family:var(--head);font-size:clamp(1.6rem,3.4vw,2.4rem);color:#fdf6ec;margin:8px 0 14px;letter-spacing:3px;text-shadow:0 0 30px rgba(58,160,255,.18)}
-.grad{background:linear-gradient(90deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
-.sec-line{height:1px;width:110px;background:linear-gradient(90deg,var(--cyan),var(--green),transparent)}
+.grad{color:var(--green)}
+.sec-line{height:1px;width:110px;background:linear-gradient(90deg,var(--green),transparent)}
 
 /* reveal */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
@@ -283,19 +286,20 @@ clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 
 /* about */
 .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
 .about-text p{margin-bottom:16px;font-size:.93rem}
-.about-text b{color:var(--green);font-weight:500}
+.about-text b{color:#fdf6ec;font-weight:600}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .stat{border:1px solid var(--line);background:var(--panel);padding:22px 14px;border-radius:10px;text-align:center;transition:.3s}
 .stat:hover{transform:translateY(-4px);border-color:rgba(58,160,255,.45);box-shadow:0 10px 30px rgba(58,160,255,.1)}
-.stat .num{font-family:var(--head);font-size:2rem;font-weight:700;background:linear-gradient(180deg,#fdf6ec,var(--green));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 12px rgba(239,35,60,.35))}
+.stat .num{font-family:var(--head);font-size:2rem;font-weight:700;color:#fdf6ec}
 .stat .lbl{font-size:.7rem;color:var(--muted);letter-spacing:1.5px;margin-top:4px;text-transform:uppercase}
 .tele{margin-top:14px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:16px 18px}
 .tele-title{font-size:.68rem;letter-spacing:2px;color:var(--cyan);margin-bottom:12px}
 .tele-title span{color:var(--muted);letter-spacing:0;text-transform:none}
 .tele-row{display:grid;grid-template-columns:40px 1fr 78px;gap:10px;align-items:center;font-size:.66rem;color:var(--muted);margin-bottom:8px}
+.tele-row.lbl-wide{grid-template-columns:104px 1fr}
 .tele-row:last-child{margin-bottom:0}
-.tele-row b{color:var(--green);font-weight:500;text-align:right;font-size:.66rem}
-.tv-wide{grid-column:2/-1;color:var(--cyan);font-size:.72rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tele-row b{color:#c9d6e3;font-weight:600;text-align:right;font-size:.66rem}
+.tv-wide{grid-column:2/-1;color:#c9d6e3;font-size:.72rem;line-height:1.5;overflow:visible;white-space:normal;word-break:break-word}
 .tv-wide .na{color:var(--muted)}
 .spark{width:100%;height:34px;display:block}
 .tele-status{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:.7rem;letter-spacing:2px;color:var(--green)}
@@ -312,14 +316,14 @@ clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 
 .tab{font-family:var(--mono);font-size:.82rem;color:var(--muted);background:rgba(239,35,60,.03);border:1px solid var(--line);padding:9px 18px;cursor:pointer;transition:.25s;
 clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
 .tab:hover{color:var(--cyan);border-color:rgba(58,160,255,.4)}
-.tab.active{color:#1a1206;background:linear-gradient(90deg,var(--cyan),var(--green));border-color:var(--green);font-weight:700;filter:drop-shadow(0 0 12px rgba(239,35,60,.4))}
+.tab.active{color:#1a1206;background:var(--green);border-color:var(--green);font-weight:700;filter:drop-shadow(0 0 10px rgba(239,35,60,.35))}
 .tab-panel{display:none}
 .tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:14px 42px}
 .skill{margin-bottom:14px}
 .skill-top{display:flex;justify-content:space-between;font-size:.84rem;margin-bottom:7px}
-.skill-top .pct{color:var(--green)}
+.skill-top .pct{color:#fdf6ec}
 .bar{height:6px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
-.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--mag),var(--cyan),var(--green));box-shadow:0 0 12px rgba(239,35,60,.55);transition:width 1.2s cubic-bezier(.22,1,.36,1);border-radius:4px}
+.bar-fill{height:100%;width:0;background:var(--green);box-shadow:0 0 8px rgba(239,35,60,.35);transition:width 1.2s cubic-bezier(.22,1,.36,1);border-radius:4px}
 
 /* experience */
 .timeline{position:relative;margin-left:6px;padding-left:34px;border-left:1px solid var(--line);max-width:860px}
@@ -335,7 +339,7 @@ li::marker{color:var(--green)}
 .t-proj{border:1px dashed rgba(239,35,60,.28);border-radius:8px;padding:16px 18px;margin-top:16px;background:rgba(239,35,60,.02)}
 .t-proj h4{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--cyan);font-size:.92rem;font-family:var(--mono);font-weight:500}
 .t-proj h4 span{color:var(--muted);font-weight:400;font-size:.72rem}
-.t-proj b{color:var(--green);font-weight:500}
+.t-proj b{color:#fdf6ec;font-weight:600}
 
 /* lab */
 .lab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px}
@@ -346,14 +350,14 @@ li::marker{color:var(--green)}
 .lab-path{margin-left:6px;font-size:.68rem;color:var(--muted)}
 .live-tag{margin-left:auto;display:flex;align-items:center;gap:7px;color:var(--green);font-size:.6rem;letter-spacing:1.5px;white-space:nowrap}
 .lab-body{padding:20px;flex:1}
-.lab-tag{font-size:.68rem;color:var(--cyan);letter-spacing:2px}
+.lab-tag{font-size:.68rem;color:var(--muted);letter-spacing:2px}
 .lab-body h3{color:#fdf6ec;font-size:1rem;margin:8px 0 10px;letter-spacing:1px}
 .featured h3{font-size:1.2rem}
 .lab-body p{font-size:.84rem;color:var(--muted);margin-bottom:16px}
 .road{display:flex;flex-direction:column;gap:9px;margin:14px 0 18px;font-size:.84rem}
 .road-row{display:flex;gap:11px;align-items:baseline}
 .road-row .st{width:20px;flex-shrink:0}
-.road-row .fx{color:var(--cyan);flex-shrink:0;min-width:38px}
+.road-row .fx{color:var(--muted);flex-shrink:0;min-width:38px}
 .road-row p{color:var(--muted);font-size:.82rem}
 .radar{width:76px;height:76px;border-radius:50%;border:1px solid var(--line);position:relative;overflow:hidden;flex-shrink:0;background:radial-gradient(circle,rgba(239,35,60,.05),transparent 70%)}
 .radar::before{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(239,35,60,.45),transparent 70deg);animation:ringspin 3.2s linear infinite}
@@ -470,9 +474,9 @@ section{padding:80px 0}
 
 <aside class="hud-side" aria-hidden="true">
 <div class="hud-item"><span>LOC</span><b>17.3850°N 78.4867°E</b></div>
-<div class="hud-item"><span>UPTIME</span><b id="uptime">00:00:00</b></div>
+<div class="hud-item"><span>EXPERIENCE</span><b>3+ YRS</b></div>
 <div class="hud-item"><span>STATUS</span><b class="ok"><span class="pulse" style="width:6px;height:6px"></span> SYSTEM ONLINE</b></div>
-<div class="hud-item"><span>NODE</span><b>HYD-SEC-01</b></div>
+<div class="hud-item"><span>CERT</span><b>CEH v13</b></div>
 </aside>
 <div class="hud-coords" id="hudCoords" aria-hidden="true">X:0000 · Y:0000</div>
 
@@ -486,7 +490,7 @@ section{padding:80px 0}
 <li><a href="#home" class="active"><b>01.</b>home</a></li>
 <li><a href="#about"><b>02.</b>about</a></li>
 <li><a href="#skills"><b>03.</b>skills</a></li>
-<li><a href="#experience"><b>04.</b>experience</a></li>
+<li><a href="#experience"><b>04.</b>work</a></li>
 <li><a href="#lab"><b>05.</b>lab</a></li>
 <li><a href="#blog"><b>06.</b>blog</a></li>
 <li><a href="#certs"><b>07.</b>recognition</a></li>
@@ -516,13 +520,14 @@ section{padding:80px 0}
 <div class="orb o3" aria-hidden="true"></div>
 <div class="container hero-grid">
 <div>
-<div class="badge flyin d1"><span class="pulse"></span> CEH v13 CERTIFIED · OPEN TO SECURITY ROLES</div>
-<h1 class="glitch flyin d2" data-text="SHAIK ABDUL BAKHTIAR">SHAIK ABDUL BAKHTIAR</h1>
+<div class="badge flyin d1"><span class="pulse"></span> CEH v13 CERTIFIED · BUILDING SEC-FRAME</div>
+<h1 class="glitch flyin d2" data-text="BAKHTIAR">BAKHTIAR</h1>
 <div class="tw-line flyin d3"><span class="p">&gt;_</span> <span id="typewriter"></span><span class="tw-cursor"></span></div>
-<p class="hero-sub flyin d4">CEH v13-certified security practitioner who builds reliable automation in <b>TypeScript, Java &amp; Python</b> — and applies the same discipline to <b>VAPT, OSINT, cryptography, Windows &amp; cloud security, DevSecOps</b>. If it can be tested, it can be hardened — and I automate both.</p>
+<p class="hero-sub flyin d4">CEH v13-certified, I do the hands-on work myself — <b>VAPT, OSINT recon, exploitation</b> — then build the automation that makes it repeatable, in <b>TypeScript, Java &amp; Python</b>. Find it. Harden it. Automate it.</p>
 <div class="btn-row flyin d5">
 <a href="#lab" class="btn solid">[ VIEW SEC-FRAME ]</a>
 <a href="#blog" class="btn">[ READ THE BLOG ]</a>
+<a href="#live-recon" class="btn">[ TRY LIVE RECON ]</a>
 <button class="btn" onclick="openTerm()">[ LAUNCH TERMINAL ]</button>
 </div>
 <div class="hint flyin d6">tip: press <kbd>`</kbd> for the shell — try <kbd>secframe</kbd> or <kbd>hack</kbd> 😏</div>
@@ -576,9 +581,9 @@ section{padding:80px 0}
 </div>
 <div class="about-grid">
 <div class="about-text reveal">
-<p>I'm <b>Shaik Abdul Bakhtiar</b> — an Automation Engineer (SME) at <b>OSI</b>, working on the <b>Enfin</b> platform, with 3+ years building automation for finance and SaaS platforms: UI and API frameworks in Playwright, Selenium and RestAssured, plus mentoring the team as its subject-matter expert.</p>
-<p>I've been building a security skillset the same way I build frameworks: hands-on and repeatable, anchored by the <b>CEH v13 (Certified Ethical Hacker)</b> certification from EC-Council. That means VAPT labs with <b>Nmap, Nessus and Metasploit</b>, OSINT with <b>Subfinder, Sherlock and httpx</b>, and foundations in <b>cryptography, Windows security, cloud security and DevSecOps</b>. It came together in <b>SEC-FRAME</b> — a security-automation framework I wrote that runs security checks as BDD scenarios and wires DAST scanning through OWASP ZAP. v0.2 is in active development.</p>
-<p>I hold a <b>B.Tech in IT and an MBA</b>, which mostly means I can translate technical risk into business terms — what a vulnerability costs, and what fixing it saves.</p>
+<p>I'm <b>Shaik Abdul Bakhtiar</b> — an Automation Engineer (SME) at <b>OSI</b>, building UI and API automation in Playwright, Selenium and RestAssured for finance and SaaS platforms, and mentoring my team as its subject-matter expert.</p>
+<p><b>CEH v13</b>-certified, I'm building a security skillset the same hands-on way: VAPT labs with <b>Nmap, Nessus and Metasploit</b>, OSINT with <b>Subfinder, Sherlock and httpx</b>, and working knowledge of <b>cryptography, Windows security, cloud security and DevSecOps</b>. <b>SEC-FRAME</b>, my security-automation framework wiring OWASP ZAP into CI, is where it comes together.</p>
+<p><b>B.Tech in IT + MBA</b>: I translate technical risk into business terms — what a vulnerability costs, and what fixing it saves.</p>
 </div>
 <div>
 <div class="stats reveal">
@@ -587,21 +592,11 @@ section{padding:80px 0}
 <div class="stat holo"><div class="num" data-target="4">0</div><div class="lbl">Certifications</div></div>
 <div class="stat holo"><div class="num" data-target="3">0</div><div class="lbl">Client Recognitions</div></div>
 </div>
-<div class="tele reveal" style="transition-delay:.1s">
-<div class="tele-title">▚ LIVE TELEMETRY <span>· real values · measured in your browser · 100% local — zero data leaves this device</span></div>
-<div class="tele-row"><span>FPS</span><canvas class="spark" id="tfps"></canvas><b id="tv-fps">—</b></div>
-<div class="tele-row"><span>NET</span><span class="tv-wide" id="tv-net">measuring…</span></div>
-<div class="tele-row"><span>MEM</span><span class="tv-wide" id="tv-mem">measuring…</span></div>
-<div class="tele-row"><span>CPU</span><span class="tv-wide" id="tv-core">measuring…</span></div>
-<div class="tele-row"><span>BATT</span><span class="tv-wide" id="tv-batt">measuring…</span></div>
-<div class="tele-row"><span>TIME</span><span class="tv-wide" id="tv-time">—</span></div>
-<div class="tele-status" id="tv-status">● ONLINE</div>
-</div>
 </div>
 </div>
 <div class="strengths">
 <div class="s-card holo reveal"><span class="ic">⚡</span><h3>FAST TECH ADOPTION</h3><p>Led the team's migration from Selenium/Java to Playwright + TypeScript — a 30% execution-speed gain, delivered without disrupting sprint commitments.</p></div>
-<div class="s-card holo reveal" style="transition-delay:.1s"><span class="ic">🤖</span><h3>SECURITY AUTOMATION</h3><p>Built SEC-FRAME to run security checks as BDD scenarios with OWASP ZAP DAST in CI. v0.2 — CVSS scoring and report generation — is in active development.</p></div>
+<div class="s-card holo reveal" style="transition-delay:.1s"><span class="ic">🤖</span><h3>SECURITY AUTOMATION</h3><p>Built SEC-FRAME to run automated security scans with OWASP ZAP DAST in CI. v0.2 — CVSS scoring and report generation — is in active development.</p></div>
 <div class="s-card holo reveal" style="transition-delay:.2s"><span class="ic">🧠</span><h3>BUSINESS-AWARE ENGINEERING</h3><p>MBA + B.Tech IT: I present findings the way leadership needs them — risk, impact, and the cost of fixing it.</p></div>
 </div>
 </div>
@@ -660,37 +655,26 @@ section{padding:80px 0}
 <section id="experience">
 <div class="container">
 <div class="sec-head reveal">
-<span class="sec-tag">// 04. experience.log</span>
-<h2><span class="dec">PROFESSIONAL</span> <span class="grad dec">EXPERIENCE</span></h2>
+<span class="sec-tag">// 04. ~/the_work</span>
+<h2><span class="dec">SELECTED</span> <span class="grad dec">WORK</span></h2>
 <div class="sec-line"></div>
 </div>
-<div class="timeline">
-<div class="t-item reveal">
-<div class="t-dot"></div>
-<div class="t-date">2021.11 — PRESENT</div>
-<div class="t-card">
-<h3>AUTOMATION ENGINEER (SME) <span>· Enfin</span></h3>
-<p style="font-size:.85rem;color:var(--muted)">Subject Matter Expert — leading automation, mentoring the team, and wiring security thinking into every pipeline.</p>
-<div class="t-proj holo">
-<h4>▸ Solar Corp — Finance Platform <span>2022.04 – PRESENT</span></h4>
-<ul>
-<li>Spearheaded migration from legacy <b>Selenium/Java</b> to <b>Playwright with TypeScript</b>, improving execution speed by <b>30%</b>.</li>
-<li>Developed API automation frameworks using <b>RestAssured</b>.</li>
-<li>Acting as SME — leading technical support and mentoring the team.</li>
-<li>Received the <b>Rising Star</b> award for exceeding delivery benchmarks.</li>
-</ul>
+
+<article class="lab-card featured tilt holo reveal">
+<div class="lab-top">
+<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+<span class="lab-path">root@osi:~# ./rebuild_framework --live --zero-downtime</span>
+<span class="live-tag"><span class="pulse" style="width:6px;height:6px"></span>3+ YRS · SME @ OSI</span>
 </div>
-<div class="t-proj holo">
-<h4>▸ Plan-view — SaaS Integration <span>2021.11 – 2022.03</span></h4>
-<ul>
-<li>Automated complex <b>Salesforce–NetSuite</b> integration flows.</li>
-<li>Resolved critical defects in the <b>FOREFRONT</b> system.</li>
-<li>Received the <b>Pat on the Back</b> award within the first year.</li>
-</ul>
+<div class="lab-body">
+<span class="lab-tag">[ CASE STUDY — FINANCE PLATFORM AUTOMATION ]</span>
+<h3>REBUILDING A LIVE TEST SUITE WITHOUT BREAKING DELIVERY</h3>
+<p>I inherited a slow, brittle <b style="color:#fdf6ec">Selenium/Java</b> suite on a live finance platform — the kind of codebase where nobody wants to touch the framework. I rebuilt it around <b style="color:#fdf6ec">Playwright and TypeScript</b>, migrating the framework live, mid-project, without breaking a single sprint commitment, and cut execution time by <b style="color:#fdf6ec">30%</b> along the way.</p>
+<p>Alongside the UI layer I built out API automation in <b style="color:#fdf6ec">RestAssured</b>, and became the team's go-to SME — the person others bring their hardest problems to. That work earned a <b>Rising Star</b> award from the client; more on that in Recognition below.</p>
+<div class="chips"><span>Playwright</span><span>TypeScript</span><span>Selenium → Playwright migration</span><span>RestAssured</span></div>
 </div>
-</div>
-</div>
-</div>
+</article>
+
 </div>
 </section>
 
@@ -707,6 +691,65 @@ section{padding:80px 0}
 </div>
 <div class="lab-grid">
 
+<article class="lab-card featured tilt holo reveal" id="live-recon">
+<div class="lab-top">
+<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+<span class="lab-path">root@lab:~# ./recon --target=you</span>
+<span class="live-tag"><span class="pulse" style="width:6px;height:6px"></span>LIVE · TRY IT NOW</span>
+</div>
+<div class="lab-body">
+<span class="lab-tag">[ INTERACTIVE — RUNS AGAINST YOUR OWN BROWSER ]</span>
+<h3>CLIENT RECON &amp; PASSWORD BREACH CHECK</h3>
+<p>The passive recon a real assessment starts with, run live against your own browser: connection security, tracking headers, cookie exposure, timezone and screen fingerprinting. Below it, a password strength &amp; breach checker using the same k-anonymity technique real security tools use — only a 5-character hash fragment ever leaves your browser, never the password itself.</p>
+<div class="tele" style="margin:0 0 16px">
+<div class="tele-title">▚ CLIENT RECON <span>· passive checks on your own browser · fully local, nothing sent anywhere</span></div>
+<div class="tele-row"><span>CONN</span><span class="tv-wide" id="tv-https">checking…</span></div>
+<div class="tele-row"><span>DNT</span><span class="tv-wide" id="tv-dnt">checking…</span></div>
+<div class="tele-row"><span>COOKIES</span><span class="tv-wide" id="tv-cookies">checking…</span></div>
+<div class="tele-row"><span>TZ</span><span class="tv-wide" id="tv-tz">checking…</span></div>
+<div class="tele-row"><span>SCREEN</span><span class="tv-wide" id="tv-screen">checking…</span></div>
+<div class="tele-row"><span>UA</span><span class="tv-wide" id="tv-ua">checking…</span></div>
+<div class="tele-status" id="tv-status">● passive recon complete</div>
+<div style="margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)">
+<div style="font-size:.68rem;letter-spacing:1.5px;color:var(--cyan);margin-bottom:4px">▚ PASSWORD CRACK-TIME ESTIMATOR</div>
+<div style="font-size:.68rem;color:var(--muted);margin-bottom:8px">crack-time is calculated locally · breach check sends only a 5-character hash fragment to a public API, never the password itself</div>
+<input id="pwProbe" type="text" placeholder="type a password to test (never stored — checked via k-anonymity)" autocomplete="off" style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text);font-family:var(--mono);font-size:.8rem;padding:9px 12px;border-radius:6px;outline:none">
+<div id="pwResult" style="margin-top:10px;font-size:.8rem;color:var(--muted)">— waiting for input —</div>
+</div>
+</div>
+</div>
+</article>
+
+<article class="lab-card featured tilt holo reveal" id="site-audit">
+<div class="lab-top">
+<span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+<span class="lab-path">root@lab:~# ./audit --self --live</span>
+<span class="live-tag"><span class="pulse" style="width:6px;height:6px"></span>LIVE · SELF-AUDIT</span>
+</div>
+<div class="lab-body">
+<span class="lab-tag">[ INTERACTIVE — SCANS THIS SITE'S RESPONSE + YOUR BROWSER ]</span>
+<h3>SECURITY HEADERS &amp; WEBRTC LEAK CHECK</h3>
+<p>Two checks pointed at the site itself rather than at you: how locked-down this page's own HTTP response headers are, and whether your browser leaks your private network IP over WebRTC — a real privacy issue, separate from your ordinary public IP.</p>
+<button type="button" class="btn" id="auditToggle" aria-expanded="false" aria-controls="auditPanel">[ RUN THE CHECKS ]</button>
+<div id="auditPanel" style="display:none;margin-top:16px">
+<div class="tele" style="margin:0 0 16px">
+<div class="tele-title">▚ SECURITY HEADERS <span>· this page's HTTP response, read live</span></div>
+<div class="tele-row lbl-wide"><span>HSTS</span><span class="tv-wide" id="tv-hsts">scanning…</span></div>
+<div class="tele-row lbl-wide"><span>CSP</span><span class="tv-wide" id="tv-csp">scanning…</span></div>
+<div class="tele-row lbl-wide"><span>X-FRAME</span><span class="tv-wide" id="tv-xfo">scanning…</span></div>
+<div class="tele-row lbl-wide"><span>X-CTO</span><span class="tv-wide" id="tv-xcto">scanning…</span></div>
+<div class="tele-row lbl-wide"><span>REFERRER</span><span class="tv-wide" id="tv-refpol">scanning…</span></div>
+<div class="tele-row lbl-wide"><span>PERMISSIONS</span><span class="tv-wide" id="tv-permspol">scanning…</span></div>
+<div class="tele-status" id="tv-headers-status">● scanning response headers…</div>
+</div>
+<div class="tele">
+<div class="tele-title">▚ WEBRTC IP-LEAK CHECK <span>· looks for a leaked private IP, the kind that survives behind a VPN</span></div>
+<div class="tele-row lbl-wide"><span>LEAK</span><span class="tv-wide" id="webrtc-result">checking…</span></div>
+</div>
+</div>
+</div>
+</article>
+
 <article class="lab-card featured tilt holo reveal">
 <div class="lab-top">
 <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
@@ -716,9 +759,9 @@ section{padding:80px 0}
 <div class="lab-body">
 <span class="lab-tag">[ AUTOMATION × SECURITY — FLAGSHIP BUILD ]</span>
 <h3>SEC-FRAME — SECURITY AUTOMATION FRAMEWORK</h3>
-<p>A framework that runs <b style="color:var(--green)">security checks as BDD scenarios, wired through OWASP ZAP (DAST) and executed in CI</b> — automating what operators normally do manually. v0.1 MVP is shipped; v0.2 is in active development.</p>
+<p>A framework that runs <b style="color:var(--green)">automated security scans, wired through OWASP ZAP (DAST) and executed in CI</b> — automating what operators normally do manually. v0.1 MVP is shipped; v0.2 is in active development.</p>
 <div class="road">
-<div class="road-row"><span class="st">✅</span><span class="fx">v0.1</span><p>Shipped — BDD security scenarios, ZAP scan runner, GitHub Actions CI</p></div>
+<div class="road-row"><span class="st">✅</span><span class="fx">v0.1</span><p>Shipped — automated scan scenarios, ZAP scan runner, GitHub Actions CI</p></div>
 <div class="road-row"><span class="st">🔨</span><span class="fx">v0.2</span><p>In development — CVSS scoring, HTML/PDF report generation</p></div>
 <div class="road-row"><span class="st">🔮</span><span class="fx">v0.3</span><p>Planned — scheduled scans &amp; alerting from CI</p></div>
 </div>
@@ -727,7 +770,7 @@ section{padding:80px 0}
 <div class="btn-row" style="margin-bottom:18px">
 <a class="btn" data-gh="secframe" href="#" target="_blank" rel="noopener">[ VIEW SOURCE — GITHUB ↗ ]</a>
 </div>
-<div class="chips"><span>Playwright</span><span>TypeScript</span><span>OWASP ZAP</span><span>BDD</span><span>GitHub Actions</span></div>
+<div class="chips"><span>Playwright</span><span>TypeScript</span><span>OWASP ZAP</span><span>GitHub Actions</span></div>
 </div>
 </article>
 
@@ -796,12 +839,12 @@ section{padding:80px 0}
 <div class="cert-grid">
 <div class="cert holo reveal" style="border-color:rgba(255,209,102,.4)"><div class="c-ic" style="color:var(--gold)">🛡</div><div><h3>CEH v13 — CERTIFIED ETHICAL HACKER</h3><p>EC-Council — ethical hacking &amp; VAPT methodologies, AI-driven security tooling</p></div></div>
 <div class="cert holo reveal" style="transition-delay:.08s"><div class="c-ic">✓</div><div><h3>CISCO PACKET TRACER CERTIFICATION</h3><p>Cisco Networking Academy — network simulation &amp; topology analysis</p></div></div>
-<div class="cert holo reveal" style="transition-delay:.16s"><div class="c-ic">✓</div><div><h3>CPSAT — CERTIFIED SELENIUM AUTOMATION TESTER</h3><p>Foundation certification in test automation</p></div></div>
+<div class="cert holo reveal" style="transition-delay:.16s"><div class="c-ic">✓</div><div><h3>CPSAT — CERTIFIED SELENIUM AUTOMATION TESTER</h3><p>Certification in Selenium-based test automation</p></div></div>
 <div class="cert holo reveal" style="transition-delay:.24s"><div class="c-ic">✓</div><div><h3>PROFESSIONAL ENGLISH PROFICIENCY</h3><p>Oxford — professional communication certification</p></div></div>
 </div>
 <div class="honor-grid">
-<div class="honor holo reveal"><span class="star">★</span><h3>RISING STAR AWARD</h3><p>Client recognition for delivery quality on the Solar Corp finance platform.</p></div>
-<div class="honor holo reveal" style="transition-delay:.1s"><span class="star">★</span><h3>PAT ON THE BACK</h3><p>Service-excellence recognition within the first year at Enfin.</p></div>
+<div class="honor holo reveal"><span class="star">★</span><h3>RISING STAR AWARD</h3><p>Client recognition for delivery quality on a live finance-platform rebuild.</p></div>
+<div class="honor holo reveal" style="transition-delay:.1s"><span class="star">★</span><h3>PAT ON THE BACK</h3><p>Service-excellence recognition in my first year at OSI.</p></div>
 <div class="honor holo reveal" style="transition-delay:.2s"><span class="star">★</span><h3>PAT ON THE BACK ×2</h3><p>Recognised again for technical depth and dependable delivery on high-pressure work.</p></div>
 </div>
 </div>
@@ -1099,92 +1142,182 @@ if(!RM){(function loop(){if(!paused)sp();requestAnimationFrame(loop);})();}
 else sp();
 })();
 
-/* ================= REAL local telemetry ================= */
-const telemetrySnapshot=()=>({
-fps:lastFps,
-net:(navigator.connection&&navigator.connection.effectiveType)?navigator.connection.effectiveType.toUpperCase()+' · '+(navigator.connection.downlink||'?')+'Mb/s':null,
-mem:(performance.memory)?Math.round(performance.memory.usedJSHeapSize/1048576)+' MB page heap':null,
-cores:(navigator.hardwareConcurrency||null),
-online:navigator.onLine
-});
-let lastFps=60;
+/* ================= client recon panel + password estimator ================= */
 (function(){
 const els={
-fps:document.getElementById('tv-fps'),
-net:document.getElementById('tv-net'),
-mem:document.getElementById('tv-mem'),
-core:document.getElementById('tv-core'),
-batt:document.getElementById('tv-batt'),
-time:document.getElementById('tv-time'),
+https:document.getElementById('tv-https'),
+dnt:document.getElementById('tv-dnt'),
+cookies:document.getElementById('tv-cookies'),
+tz:document.getElementById('tv-tz'),
+screen:document.getElementById('tv-screen'),
+ua:document.getElementById('tv-ua'),
 status:document.getElementById('tv-status')
 };
-const na='<span class="na">N/A — browser doesn\'t expose (privacy-safe)</span>';
-const fc=document.getElementById('tfps');
-let fctx=null,hist=[];
-function fitF(){try{fctx=fit(fc);}catch(e){fctx=null;}}
-fitF();
-let frames=0,lastT=performance.now();
-function loop(t){
-frames++;
-if(t-lastT>=1000){
-lastFps=Math.round(frames*1000/(t-lastT));
-frames=0;lastT=t;
-els.fps.textContent=lastFps+' fps';
-hist.push(lastFps);if(hist.length>44)hist.shift();
-if(fctx&&fc){
-const r=fc.getBoundingClientRect(),w=r.width,h=r.height;
-fctx.clearRect(0,0,w,h);
-const max=Math.max(70,...hist);
-fctx.strokeStyle='#ef233c';fctx.lineWidth=1.4;fctx.beginPath();
-hist.forEach((v,i)=>{
-const x=i/43*w,y=h-((v/max)*(h-4))-2;
-i?fctx.lineTo(x,y):fctx.moveTo(x,y);
-});
-fctx.stroke();
-fctx.globalAlpha=.12;fctx.lineTo(w,h);fctx.lineTo(0,h);fctx.closePath();
-fctx.fillStyle='#ef233c';fctx.fill();fctx.globalAlpha=1;
-}
-}
-requestAnimationFrame(loop);
-}
-requestAnimationFrame(loop);
-function netUpd(){
-const c=navigator.connection;
-if(c&&c.effectiveType){
-els.net.innerHTML=(c.effectiveType||'?').toUpperCase()+' · '+(c.downlink||'?')+' Mb/s down · rtt '+(c.rtt||'?')+'ms';
-}else{els.net.innerHTML=na;}
-}
-netUpd();
-if(navigator.connection)navigator.connection.addEventListener('change',netUpd);
-function memUpd(){
-if(performance.memory){
-const m=performance.memory;
-els.mem.textContent=Math.round(m.usedJSHeapSize/1048576)+' / '+Math.round(m.jsHeapSizeLimit/1048576)+' MB (this page\'s heap)';
-}else{els.mem.innerHTML=na;}
-}
-memUpd();setInterval(memUpd,3000);
-els.core.textContent=(navigator.hardwareConcurrency||'?')+' logical cores · DPR '+(devicePixelRatio||1)+' · '+screen.width+'×'+screen.height;
-if(navigator.getBattery){
-navigator.getBattery().then(b=>{
-const upd=()=>{
-const pct=Math.round(b.level*100);
-els.batt.textContent=pct+'% · '+(b.charging?'⚡ charging':'on battery');
+if(!els.https)return;
+els.https.innerHTML=(location.protocol==='https:')
+?'<span style="color:var(--cyan)">HTTPS — encrypted</span>'
+:'<span style="color:var(--green)">HTTP — unencrypted</span>';
+const dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack;
+els.dnt.textContent=(dnt==='1'||dnt==='yes')?'enabled — you asked sites not to track you':'not set — most visitors leave this off';
+els.cookies.textContent=navigator.cookieEnabled?'enabled':'blocked';
+let tz='unknown';
+try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'unknown';}catch(e){}
+els.tz.textContent=tz+' (this alone narrows down your region — that\'s how OSINT starts)';
+els.screen.textContent=screen.width+'×'+screen.height+' · '+(devicePixelRatio||1)+'x DPR — one data point in a browser fingerprint';
+els.ua.textContent=navigator.userAgent||'unknown';
+els.status.textContent='● passive recon complete — nothing here left your browser';
+})();
+/* site audit — headers scan + WebRTC leak check, run only when the visitor opens the panel */
+(function(){
+const toggle=document.getElementById('auditToggle'),panel=document.getElementById('auditPanel');
+if(!toggle||!panel)return;
+let ran=false;
+function runHeaderScan(){
+const rows={
+hsts:document.getElementById('tv-hsts'),
+csp:document.getElementById('tv-csp'),
+xfo:document.getElementById('tv-xfo'),
+xcto:document.getElementById('tv-xcto'),
+refpol:document.getElementById('tv-refpol'),
+permspol:document.getElementById('tv-permspol'),
+status:document.getElementById('tv-headers-status')
 };
-upd();
-['levelchange','chargingchange'].forEach(ev=>b.addEventListener(ev,upd));
-}).catch(()=>{els.batt.innerHTML=na;});
-}else{els.batt.innerHTML=na;}
-let tz='local';
-try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'local';}catch(e){}
-function timeUpd(){els.time.textContent=new Date().toLocaleTimeString('en-GB',{hour12:false})+' · '+tz;}
-timeUpd();setInterval(timeUpd,1000);
-function statUpd(){
-if(navigator.onLine){els.status.textContent='● ONLINE — connection live';els.status.classList.remove('off');}
-else{els.status.textContent='● OFFLINE — page still works (it\'s static 🙂)';els.status.classList.add('off');}
+if(!rows.hsts)return;
+function fmt(v){
+if(!v)return '<span style="color:var(--green)">✗ not set</span>';
+const short=v.length>54?v.slice(0,54)+'…':v;
+return '<span style="color:var(--cyan)">✓ set</span> — '+short;
 }
-statUpd();
-addEventListener('online',statUpd);addEventListener('offline',statUpd);
-let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(fitF,200);});
+fetch(location.href,{method:'GET',cache:'no-store'}).then(res=>{
+rows.hsts.innerHTML=fmt(res.headers.get('strict-transport-security'));
+rows.csp.innerHTML=fmt(res.headers.get('content-security-policy'));
+rows.xfo.innerHTML=fmt(res.headers.get('x-frame-options'));
+rows.xcto.innerHTML=fmt(res.headers.get('x-content-type-options'));
+rows.refpol.innerHTML=fmt(res.headers.get('referrer-policy'));
+rows.permspol.innerHTML=fmt(res.headers.get('permissions-policy'));
+rows.status.textContent='● header scan complete — read straight off this page\'s live response';
+}).catch(()=>{
+rows.status.textContent='● header scan unavailable here (blocked or cross-origin) — this check still runs when the page is opened directly';
+});
+}
+function runWebrtcCheck(){
+const out=document.getElementById('webrtc-result');
+if(!out)return;
+const RTCPC=window.RTCPeerConnection||window.webkitRTCPeerConnection||window.mozRTCPeerConnection;
+if(!RTCPC){out.textContent='WebRTC not available in this browser — nothing to leak';return;}
+function isPrivate(ip){
+if(/^10\./.test(ip))return true;
+if(/^192\.168\./.test(ip))return true;
+if(/^169\.254\./.test(ip))return true;
+if(/^172\.(1[6-9]|2\d|3[01])\./.test(ip))return true;
+if(/^(fe80:|fc|fd)/i.test(ip))return true;
+return false;
+}
+try{
+const pc=new RTCPC({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
+const priv=new Set(),pub=new Set(),mdns=new Set();
+let done=false;
+function finish(){
+if(done)return;
+done=true;
+if(priv.size){
+out.innerHTML='<span style="color:var(--green)">⚠ local IP leaked: '+[...priv].join(', ')+'</span> — this stays visible even behind a VPN, a real privacy issue';
+}else if(mdns.size&&!pub.size){
+out.innerHTML='<span style="color:var(--cyan)">✓ no leak — local IP hidden behind mDNS obfuscation</span>';
+}else if(pub.size){
+out.innerHTML='<span style="color:var(--cyan)">✓ no local IP leaked</span> — public IP seen ('+[...pub][0]+'), same as any site you visit normally';
+}else{
+out.innerHTML='<span style="color:var(--cyan)">✓ no IP exposed via WebRTC</span>';
+}
+try{pc.close();}catch(e){}
+}
+pc.createDataChannel('probe');
+pc.onicecandidate=(e)=>{
+if(!e.candidate){finish();return;}
+const m=/candidate:\S+ \d+ \S+ \d+ (\S+) \d+ typ (\S+)/.exec(e.candidate.candidate);
+if(!m)return;
+const ip=m[1];
+if(/\.local$/i.test(ip)){mdns.add(ip);return;}
+if(isPrivate(ip))priv.add(ip);
+else pub.add(ip);
+};
+pc.createOffer().then(o=>pc.setLocalDescription(o)).catch(()=>{out.textContent='check unavailable in this browser';});
+setTimeout(finish,2200);
+}catch(e){
+out.textContent='check unavailable in this browser';
+}
+}
+toggle.addEventListener('click',()=>{
+const open=panel.style.display!=='none';
+if(open){
+panel.style.display='none';
+toggle.textContent='[ RUN THE CHECKS ]';
+toggle.setAttribute('aria-expanded','false');
+}else{
+panel.style.display='block';
+toggle.textContent='[ HIDE THE CHECKS ]';
+toggle.setAttribute('aria-expanded','true');
+if(!ran){ran=true;runHeaderScan();runWebrtcCheck();}
+}
+});
+})();
+(function(){
+const inp=document.getElementById('pwProbe'),out=document.getElementById('pwResult');
+if(!inp)return;
+function estimate(pw){
+if(!pw)return '— waiting for input —';
+let pool=0;
+if(/[a-z]/.test(pw))pool+=26;
+if(/[A-Z]/.test(pw))pool+=26;
+if(/[0-9]/.test(pw))pool+=10;
+if(/[^a-zA-Z0-9]/.test(pw))pool+=32;
+const entropyBits=Math.log2(Math.max(pool,1))*pw.length;
+const guessesPerSec=1e10;
+const seconds=Math.pow(2,entropyBits)/guessesPerSec;
+const common=['password','123456','qwerty','letmein','admin','welcome','iloveyou','abc123'];
+if(common.includes(pw.toLowerCase()))return '<span style="color:var(--green)">instantly — this is in every breach wordlist</span>';
+if(seconds<1)return '<span style="color:var(--green)">instantly</span>';
+if(seconds<60)return '<span style="color:var(--green)">'+Math.round(seconds)+' seconds</span>';
+if(seconds<3600)return '<span style="color:var(--green)">'+Math.round(seconds/60)+' minutes</span>';
+if(seconds<86400)return Math.round(seconds/3600)+' hours';
+if(seconds<31536000)return Math.round(seconds/86400)+' days';
+const years=seconds/31536000;
+if(years<1000)return '<span style="color:var(--cyan)">~'+Math.round(years)+' years</span>';
+return '<span style="color:var(--cyan)">'+years.toExponential(1)+' years — offline brute-force wouldn\'t get there</span>';
+}
+async function sha1Hex(str){
+const buf=await crypto.subtle.digest('SHA-1',new TextEncoder().encode(str));
+return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+async function checkBreach(pw){
+try{
+const hash=await sha1Hex(pw);
+const prefix=hash.slice(0,5),suffix=hash.slice(5);
+const res=await fetch('https://api.pwnedpasswords.com/range/'+prefix);
+if(!res.ok)throw new Error('range API unavailable');
+const text=await res.text();
+const line=text.split('\n').find(l=>l.split(':')[0]===suffix);
+if(line){
+const count=parseInt(line.split(':')[1],10)||0;
+return '<div style="margin-top:6px;color:var(--green)">⚠ found in '+count.toLocaleString()+' known breaches — never use this one</div>';
+}
+return '<div style="margin-top:6px;color:var(--cyan)">✓ not found in known breach dumps (checked via k-anonymity — only 5 hash chars ever left your browser)</div>';
+}catch(e){
+return '<div style="margin-top:6px;color:var(--muted)">breach check unavailable right now (offline or blocked) — crack-time estimate above still applies</div>';
+}
+}
+let bTimer=null,bSeq=0;
+inp.addEventListener('input',()=>{
+const pw=inp.value;
+out.innerHTML=estimate(pw);
+clearTimeout(bTimer);
+if(!pw){return;}
+const mySeq=++bSeq;
+bTimer=setTimeout(async()=>{
+const breachHtml=await checkBreach(pw);
+if(mySeq===bSeq)out.innerHTML=estimate(inp.value)+breachHtml;
+},600);
+});
 })();
 
 /* ================= 3D wireframe globe ================= */
@@ -1287,7 +1420,7 @@ el.classList.remove('typing');
 }
 const heroScript=[
 {p:'visitor@bakhtiar:~$',cmd:'cat identity.conf',out:['> cert=CEH v13 — Certified Ethical Hacker (EC-Council)','> role=automation × security — one skillset, two applications','> domains=VAPT, OSINT, Crypto, Windows, Cloud, DevSecOps']},
-{p:'visitor@bakhtiar:~$',cmd:'./secframe --status',out:['[+] SEC-FRAME v0.2 — build 35%','[✓] BDD security scenarios · OWASP ZAP · CI — OPERATIONAL']},
+{p:'visitor@bakhtiar:~$',cmd:'./secframe --status',out:['[+] SEC-FRAME v0.2 — build 35%','[✓] automated security scans · OWASP ZAP · CI — OPERATIONAL']},
 {p:'visitor@bakhtiar:~$',cmd:'git pull origin main',out:['[+] syncing blog from github...','[✓] field notes synced — learning in public']},
 {p:'visitor@bakhtiar:~$',cmd:'sudo ./launch_portfolio.sh',out:['[+] Arming defenses...','[✓] ACCESS GRANTED — welcome, visitor.']}
 ];
@@ -1369,6 +1502,10 @@ io.unobserve(en.target);
 });
 },{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const skillsIO=new IntersectionObserver(es=>{
+es.forEach(en=>{if(en.isIntersecting){fillBars(document.querySelector('.tab-panel.active'));skillsIO.unobserve(en.target);}});
+},{threshold:.2});
+skillsIO.observe(document.getElementById('skills'));
 
 /* ================= 3D tilt ================= */
 if(FINE&&!RM){
@@ -1688,9 +1825,9 @@ help:[
 ' <span class="g">clear</span> / <span class="g">exit</span>'],
 whoami:['bakhtiar :: CEH v13 · automation engineer × security practitioner'],
 about:[
-'Automation Engineer (SME @ OSI / Enfin) — 3+ years, finance & SaaS platforms.',
+'Automation Engineer (SME) @ OSI — 3+ years, finance & SaaS platforms.',
 'CEH v13 (EC-Council) · VAPT · OSINT · Crypto · Windows · Cloud · DevSecOps.',
-'Built SEC-FRAME — BDD security scenarios + OWASP ZAP DAST in CI. v0.2 in dev.',
+'Built SEC-FRAME — automated security scans + OWASP ZAP DAST in CI. v0.2 in dev.',
 'B.Tech (IT) + MBA · Hyderabad, India 🇮🇳'],
 skills:[
 ' <span class="g">[OFFENSE]</span> Nmap · Nessus · Metasploit · Subfinder · Sherlock · httpx',
@@ -1698,33 +1835,34 @@ skills:[
 ' <span class="g">[AUTO]</span> Playwright · Selenium · RestAssured · Postman',
 ' <span class="g">[CODE]</span> TypeScript · Java · Python'],
 exp:[
-'<span class="g">2021.11 — now</span> Automation Engineer (SME) @ Enfin',
-' ▸ Solar Corp (Finance): Playwright/TS migration, +30% speed, Rising Star award',
-' ▸ Plan-view (SaaS): Salesforce–NetSuite automation, Pat on the Back ×2'],
+'<span class="g">3+ yrs</span> Automation Engineer (SME) @ OSI',
+' ▸ Finance platform: Selenium → Playwright/TS migration, +30% speed, Rising Star award',
+' ▸ Recognised twice for delivery quality — Pat on the Back ×2'],
 secframe:[
 'SEC-FRAME v0.2 — status report',
 '──────────────────────────────',
-'pipeline : BDD scenarios → ZAP DAST → findings report <span class="g">[OPERATIONAL]</span>',
+'pipeline : automated scans → ZAP DAST → findings report <span class="g">[OPERATIONAL]</span>',
 'v0.1 : ✅ shipped (MVP)',
 'v0.2 : 🔨 35% — CVSS scoring + HTML/PDF reports',
 'v0.3 : 🔮 planned — scheduled scans & alerting from CI',
-'stack : Playwright · TypeScript · OWASP ZAP · BDD · GitHub Actions',
+'stack : Playwright · TypeScript · OWASP ZAP · GitHub Actions',
 "source : <a href='"+ghHome()+"/"+GH.secframe+"' target='_blank' rel='noopener'>"+GH.user+'/'+GH.secframe+'</a>',
 '"Repeatable beats manual — so I automate it."'],
 telemetry:()=>{
-const s=telemetrySnapshot();
+let tz='unknown';
+try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'unknown';}catch(e){}
 return [
-'REAL-TIME SENSORS — 100% local, zero network calls:',
-' fps : '+s.fps+' (measured render rate)',
-' net : '+(s.net||'not exposed by this browser'),
-' mem : '+(s.mem||'not exposed by this browser'),
-' cores : '+(s.cores||'not exposed')+' logical',
-' online: '+(s.online?'YES':'NO — yet the site still works (static 🎉)'),
-'privacy: nothing here is transmitted, stored, or tracked.'];
+'CLIENT RECON — passive checks, 100% local:',
+' conn : '+(location.protocol==='https:'?'HTTPS — encrypted':'HTTP — unencrypted'),
+' dnt : '+((navigator.doNotTrack==='1')?'enabled':'not set'),
+' cookies: '+(navigator.cookieEnabled?'enabled':'blocked'),
+' tz : '+tz,
+' screen : '+screen.width+'×'+screen.height+' · '+(devicePixelRatio||1)+'x DPR',
+"see the full live version + password breach checker on the Lab page (05.lab)"];
 },
 awards:[
-'★ Rising Star — client recognition, Solar Corp delivery quality',
-'★ Pat on the Back — service excellence, year one at Enfin',
+'★ Rising Star — client recognition for the finance-platform rebuild',
+'★ Pat on the Back — service excellence, year one at OSI',
 '★ Pat on the Back ×2 — technical depth on high-pressure deliveries'],
 github:[
 '<a href="'+ghHome()+'" target="_blank" rel="noopener">→ github.com/'+GH.user+'</a>',
@@ -1789,7 +1927,7 @@ line.append(pr,ec);tout.appendChild(line);
 const parts=raw.trim().split(/\s+/);
 const key=(parts[0]||'').toLowerCase(),args=parts.slice(1);
 if(!key){tout.scrollTop=tout.scrollHeight;return;}
-if(key==='clear'){tout.innerHTML='';return;}
+if(key==='clear'){tout.innerHTML='';tprint('<span class="g">visitor@bakhtiar</span> — cleared. type <span class="g">help</span> to see commands again.');return;}
 if(key==='exit'||key==='close'){tprint('Closing shell. Bye 👋');setTimeout(closeTerm,450);return;}
 let out;
 const c=CMDS[key];
