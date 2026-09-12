@@ -1681,7 +1681,7 @@ grid.appendChild(c);
 });
 }
 async function fetchPost(slug){
-const api='https://api.github.com/repos/'+GH.user+'/'+GH.repo+'/contents/posts/'+encodeURIComponent(slug)+'.md';
+const api='https://api.github.com/repos/'+GH.user+'/'+GH.repo+'/posts/'+encodeURIComponent(slug)+'.md';
 const res=await fetch(api);
 if(!res.ok)throw new Error('HTTP '+res.status);
 const j=await res.json();
