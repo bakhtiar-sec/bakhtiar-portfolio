@@ -1702,7 +1702,7 @@ if(repoRes.status===404){
 grid.innerHTML='<div class="blog-state"><b>[!] blog source not found.</b> Expected a <b>public</b> repo at <code>github.com/'+GH.user+'/'+GH.repo+'</code> — check the GH config at the top of the script.</div>';
 return;
 }
-const res=await fetch('https://api.github.com/repos/'+GH.user+'/'+GH.repo+'/contents/posts');
+const res=await fetch('https://api.github.com/repos/'+GH.user+'/'+GH.repo+'/posts');
 if(res.status===404){
 grid.innerHTML='<div class="blog-state"><b>[i] repo connected — now add posts.</b> In this repo, create a folder <code>posts</code> and add a <code>.md</code> file with frontmatter (title, date, summary, tags).</div>';
 return;
