@@ -31,9 +31,24 @@ header{padding:64px 0 12px}
 .sec-tag{color:var(--muted);font-size:.85rem}
 h1{font-family:var(--head);font-size:clamp(1.5rem,4vw,2.3rem);color:#fdf6ec;letter-spacing:3px;margin:8px 0 12px}
 h1 em{font-style:normal;color:var(--green)}
+h1 span{color:var(--green)}
 .sec-line{height:1px;width:110px;background:linear-gradient(90deg,var(--green),transparent)}
 header p{color:var(--muted);font-size:.9rem;margin-top:14px;max-width:600px}
-.cards{display:grid;gap:16px;margin:40px 0 20px}
+/* ── controls: sort + tag filter ── */
+.controls{margin:34px 0 8px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:16px 18px}
+.ctrl-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ctrl-label{font-size:.62rem;letter-spacing:2px;color:var(--muted);white-space:nowrap}
+.sort-btn{font-family:var(--mono);font-size:.7rem;letter-spacing:1px;color:var(--muted);
+background:rgba(239,35,60,.03);border:1px solid var(--line);padding:7px 14px;border-radius:6px;cursor:pointer;transition:.2s}
+.sort-btn:hover{color:var(--cyan);border-color:rgba(58,160,255,.4)}
+.sort-btn.active{color:#1a1206;background:var(--green);border-color:var(--green);font-weight:700}
+.tagbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.tagchip{font-family:var(--mono);font-size:.66rem;color:var(--muted);background:rgba(58,160,255,.04);
+border:1px solid var(--line);padding:5px 12px;border-radius:100px;cursor:pointer;transition:.2s}
+.tagchip:hover{color:var(--cyan);border-color:rgba(58,160,255,.45)}
+.tagchip.active{color:var(--cyan);border-color:var(--cyan);background:rgba(58,160,255,.12);box-shadow:0 0 10px rgba(58,160,255,.2)}
+#postCount{font-size:.66rem;color:var(--muted);letter-spacing:1.5px;margin:16px 0 0}
+.cards{display:grid;gap:16px;margin:20px 0 20px}
 .card{display:block;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:20px 22px;text-decoration:none;color:inherit;transition:.25s}
 .card:hover{border-color:rgba(58,160,255,.5);box-shadow:0 12px 35px rgba(58,160,255,.12);transform:translateY(-4px)}
 .card .date{font-size:.66rem;color:var(--cyan);letter-spacing:1.5px;margin-bottom:8px}
@@ -68,6 +83,8 @@ header p{color:var(--muted);font-size:.9rem;margin-top:14px;max-width:600px}
 .cta-box a:hover{background:rgba(58,160,255,.12)}
 .blog-state{border:1px dashed rgba(239,35,60,.3);border-radius:10px;padding:26px;margin-top:30px;background:rgba(239,35,60,.02);font-size:.85rem;color:var(--muted)}
 .blog-state b{color:var(--green)}
+.empty-state{border:1px dashed var(--line);border-radius:10px;padding:30px;text-align:center;font-size:.85rem;color:var(--muted);margin:20px 0}
+.empty-state b{color:var(--cyan)}
 footer{border-top:1px solid var(--line);padding:30px;text-align:center;font-size:.72rem;color:var(--muted);margin-top:70px}
 footer .g{color:var(--green)}
 </style>
@@ -89,7 +106,18 @@ footer .g{color:var(--green)}
 </header>
 
 <div class="container">
+  <div class="controls" id="controls">
+    <div class="ctrl-row">
+      <span class="ctrl-label">SORT ▸</span>
+      <button class="sort-btn active" id="sortNew">▼ NEWEST FIRST</button>
+      <button class="sort-btn" id="sortOld">▲ OLDEST FIRST</button>
+    </div>
+    <div class="tagbar" id="tagbar"></div>
+    <div id="postCount"></div>
+  </div>
+
   <div id="cards" class="cards"></div>
+  <div id="emptyMsg" class="empty-state" style="display:none">▚ no posts match <b class="ftag"></b> — <a href="#" id="clearFilter">clear filter</a></div>
 
   <div id="postView" style="display:none">
     <a class="backlink" href="#">← all posts</a>
@@ -111,6 +139,7 @@ footer .g{color:var(--green)}
 /* ── CONFIG ── */
 const GH={user:'bakhtiar-sec', repo:'bakhtiar-portfolio'};
 let ALL=[];
+const view={sort:'new', tag:null};
 
 /* ── fetch posts from /posts folder ── */
 async function loadPosts(){
@@ -122,10 +151,13 @@ async function loadPosts(){
     const mds=files.filter(f=>f.name.endsWith('.md'));
     ALL=await Promise.all(mds.map(async f=>{
       const raw=await (await fetch(f.download_url)).text();
-      return Object.assign({file:f.name, raw:raw}, frontmatter(raw));
+      const meta=frontmatter(raw);
+      meta.tagArr=(meta.tags||'').split(',').map(t=>t.trim()).filter(Boolean);
+      return Object.assign({file:f.name, raw:raw}, meta);
     }));
     ALL.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
     state.style.display='none';
+    buildTagbar();
     renderCards();
     route();
   }catch(e){
@@ -134,7 +166,7 @@ async function loadPosts(){
   }
 }
 
-/* ── parse frontmatter (title/date/summary/tags) ── */
+/* ── parse frontmatter ── */
 function frontmatter(md){
   const meta={};
   const m=md.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -177,12 +209,40 @@ function md2html(src){
   return html;
 }
 
-/* ── render cards ── */
+/* ── build tag filter bar from all posts ── */
+function buildTagbar(){
+  const counts={};
+  ALL.forEach(p=>p.tagArr.forEach(t=>counts[t]=(counts[t]||0)+1));
+  const tags=Object.keys(counts).sort();
+  document.getElementById('tagbar').innerHTML=
+    '<button class="tagchip active" data-tag="">ALL ('+ALL.length+')</button>'+
+    tags.map(t=>'<button class="tagchip" data-tag="'+t+'">'+t+' ('+counts[t]+')</button>').join('');
+  document.getElementById('tagbar').addEventListener('click',e=>{
+    const b=e.target.closest('.tagchip');if(!b)return;
+    view.tag=b.dataset.tag||null;
+    document.querySelectorAll('.tagchip').forEach(c=>c.classList.toggle('active',c===b));
+    renderCards();
+  });
+}
+
+/* ── render cards (respects sort + tag) ── */
 function renderCards(){
-  const wrap=document.getElementById('cards');
-  wrap.innerHTML=ALL.map(p=>{
+  let list=[...ALL];
+  if(view.tag) list=list.filter(p=>p.tagArr.includes(view.tag));
+  list.sort((a,b)=>view.sort==='new'
+    ?(b.date||'').localeCompare(a.date||'')
+    :(a.date||'').localeCompare(b.date||''));
+  document.getElementById('postCount').textContent='SHOWING '+list.length+' OF '+ALL.length+' POSTS';
+  const wrap=document.getElementById('cards'), empty=document.getElementById('emptyMsg');
+  if(!list.length){
+    wrap.innerHTML='';empty.style.display='block';
+    document.querySelector('.ftag').textContent=view.tag||'that';
+    return;
+  }
+  empty.style.display='none';
+  wrap.innerHTML=list.map(p=>{
     const mins=Math.max(1,Math.round(p.raw.split(/\s+/).length/200));
-    const tags=(p.tags||'').split(',').map(t=>'<span>'+t.trim()+'</span>').join('');
+    const tags=p.tagArr.map(t=>'<span>'+t+'</span>').join('');
     return '<a class="card" href="#post/'+p.file+'">'+
       '<div class="date">'+(p.date||'')+' · '+mins+' MIN READ</div>'+
       '<h3>'+(p.title||p.file)+'</h3>'+
@@ -192,10 +252,31 @@ function renderCards(){
   }).join('');
 }
 
-/* ── routing: #post/filename.md opens a post ── */
+/* ── sort buttons ── */
+document.getElementById('sortNew').addEventListener('click',()=>{
+  view.sort='new';
+  document.getElementById('sortNew').classList.add('active');
+  document.getElementById('sortOld').classList.remove('active');
+  renderCards();
+});
+document.getElementById('sortOld').addEventListener('click',()=>{
+  view.sort='old';
+  document.getElementById('sortOld').classList.add('active');
+  document.getElementById('sortNew').classList.remove('active');
+  renderCards();
+});
+document.getElementById('clearFilter').addEventListener('click',e=>{
+  e.preventDefault();
+  view.tag=null;
+  document.querySelectorAll('.tagchip').forEach(c=>c.classList.toggle('active',c.dataset.tag===''));
+  renderCards();
+});
+
+/* ── routing ── */
 function route(){
   const h=location.hash;
-  const cards=document.getElementById('cards'), pv=document.getElementById('postView');
+  const cards=document.getElementById('cards'), pv=document.getElementById('postView'),
+        ctrls=document.getElementById('controls');
   if(h.startsWith('#post/')){
     const name=decodeURIComponent(h.slice(6));
     const p=ALL.find(x=>x.file===name);
@@ -204,13 +285,13 @@ function route(){
       '<div class="p-head"><span class="sec-tag">~/posts/'+p.file+'</span>'+
       '<h2>'+(p.title||p.file)+'</h2>'+
       '<div class="meta"><span class="g">'+(p.date||'')+'</span><span>Shaik Abdul Bakhtiar</span><span>· CEH v13</span></div>'+
-      '<div class="chips">'+(p.tags||'').split(',').map(t=>'<span>'+t.trim()+'</span>').join('')+'</div></div>';
+      '<div class="chips">'+p.tagArr.map(t=>'<span>'+t+'</span>').join('')+'</div></div>';
     document.getElementById('postBody').innerHTML=md2html(p.raw);
     document.title=(p.title||'Blog')+' | Shaik Abdul Bakhtiar';
-    cards.style.display='none';pv.style.display='block';
+    cards.style.display='none';ctrls.style.display='none';pv.style.display='block';
     window.scrollTo(0,0);
   }else{
-    pv.style.display='none';cards.style.display='grid';
+    pv.style.display='none';cards.style.display='grid';ctrls.style.display='block';
     document.title='Blog | Shaik Abdul Bakhtiar — Cybersecurity, Simplified';
   }
 }
