@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070b12">
+<title>Security Automation & VAPT Services | Shaik Abdul Bakhtiar</title>
+<meta name="description" content="Practical security engineering for startups: DAST in your CI/CD pipeline, web app VAPT, and security automation. CEH v13 certified. Fixed-price, no bloated reports.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23070b12'/><text x='32' y='44' font-family='monospace' font-size='30' fill='%23ef233c' text-anchor='middle'>%3E_</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b12;--panel:#0d1420;--line:rgba(239,35,60,.14);--green:#ef233c;--cyan:#3aa0ff;
+--text:#c9d6e3;--muted:#7a8ba0;--mono:'JetBrains Mono',monospace;--head:'Orbitron',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);line-height:1.65}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 32px;border-bottom:1px solid var(--line)}
+nav a{color:var(--cyan);text-decoration:none;font-size:.78rem;letter-spacing:1px}
+.brand{color:#fdf6ec;font-weight:700;font-size:1rem}
+.brand span{color:var(--green)}
+header{padding:90px 0 60px;text-align:center;background:
+radial-gradient(ellipse at 50% 0%,rgba(239,35,60,.07),transparent 55%)}
+.badge{display:inline-block;border:1px solid rgba(58,160,255,.3);background:rgba(58,160,255,.08);
+color:var(--cyan);font-size:.7rem;letter-spacing:2px;padding:7px 16px;border-radius:4px;margin-bottom:22px}
+h1{font-family:var(--head);color:#fdf6ec;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:3px;margin-bottom:16px}
+h1 em{font-style:normal;color:var(--green)}
+.sub{color:var(--muted);max-width:640px;margin:0 auto;font-size:.95rem}
+section{padding:60px 0}
+h2{font-family:var(--head);color:#fdf6ec;font-size:1.3rem;letter-spacing:2px;margin-bottom:34px}
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:26px;display:flex;flex-direction:column}
+.card:hover{border-color:rgba(58,160,255,.45)}
+.card.hot{border-color:rgba(239,35,60,.4)}
+.tag{font-size:.62rem;letter-spacing:2px;color:var(--cyan)}
+.card h3{color:#fdf6ec;font-size:1rem;margin:10px 0 12px;letter-spacing:1px}
+.price{font-family:var(--head);color:var(--green);font-size:1.15rem;margin-bottom:14px}
+.price small{color:var(--muted);font-family:var(--mono);font-size:.68rem;display:block;margin-top:4px}
+.card ul{list-style:none;flex:1}
+.card li{font-size:.8rem;color:var(--muted);margin:8px 0;padding-left:18px;position:relative}
+.card li::before{content:'▸';color:var(--green);position:absolute;left:0}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.step{border:1px dashed rgba(239,35,60,.28);border-radius:8px;padding:18px}
+.step b{color:var(--cyan);font-size:.68rem;letter-spacing:2px}
+.step p{font-size:.8rem;color:var(--muted);margin-top:8px}
+.trust{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.trust span{border:1px solid var(--line);font-size:.68rem;color:var(--text);padding:7px 14px;border-radius:100px;background:rgba(239,35,60,.04)}
+form{max-width:560px}
+label{display:block;color:var(--green);font-size:.8rem;margin:16px 0 6px}
+input,textarea,select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text);
+font-family:var(--mono);font-size:.85rem;padding:11px 13px;border-radius:6px;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--cyan)}
+.btn{background:var(--cyan);color:#04101d;font-weight:700;font-family:var(--mono);font-size:.85rem;
+padding:.9rem 1.8rem;border:none;cursor:pointer;margin-top:20px;letter-spacing:1px;
+clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+.btn:hover{filter:drop-shadow(0 0 16px rgba(58,160,255,.55))}
+footer{border-top:1px solid var(--line);padding:30px;text-align:center;font-size:.7rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html"><span>&gt;_</span> BAKHTIAR</a>
+  <a href="index.html">← back to portfolio</a>
+</nav>
+
+<header>
+  <div class="container">
+    <div class="badge">● ACCEPTING NEW CLIENTS — LIMITED SLOTS / MONTH</div>
+    <h1>SECURITY <em>×</em> AUTOMATION<br>FOR STARTUPS</h1>
+    <p class="sub">You don't need a Big-4 audit and a 90-page PDF nobody reads.
+    You need your pipeline scanning for vulnerabilities automatically, and your web app checked by someone who actually exploits things. Fixed price. Clear reports. Fast.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <h2>// what I do</h2>
+    <div class="offers">
+
+      <div class="card hot">
+        <span class="tag">FLAGSHIP — MOST POPULAR</span>
+        <h3>DAST IN YOUR CI/CD PIPELINE</h3>
+        <div class="price">₹25,000 – ₹75,000<small>one-time setup · scope-based</small></div>
+        <ul>
+          <li>OWASP ZAP wired into your GitHub Actions / GitLab CI</li>
+          <li>Scans run on every deploy — not once a year</li>
+          <li>CVSS-scored findings, auto-generated reports</li>
+          <li>Built on SEC-FRAME, my own open framework</li>
+          <li>Team handover + docs included</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="tag">WEB APPLICATION VAPT</span>
+        <h3>WEB APP SECURITY ASSESSMENT</h3>
+        <div class="price">₹30,000 – ₹90,000<small>per application · fixed scope</small></div>
+        <ul>
+          <li>OWASP Top 10 + business-logic testing</li>
+          <li>Manual exploitation, not just scanner output</li>
+          <li>Report written for devs AND for leadership</li>
+          <li>Free retest after fixes</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="tag">ADVISORY</span>
+        <h3>SECURITY AUTOMATION CONSULTING</h3>
+        <div class="price">₹3,000/hr<small>or monthly retainer</small></div>
+        <ul>
+          <li>Security tooling & recon automation</li>
+          <li>Playwright/test-automation migrations</li>
+          <li>DevSecOps process design</li>
+          <li>Pay-as-you-go, no lock-in</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <h2>// how it works</h2>
+    <div class="steps">
+      <div class="step"><b>01 — SCOPING CALL</b><p>30 min, free. I map your app/pipeline and quote a fixed price. No surprise invoices.</p></div>
+      <div class="step"><b>02 — EXECUTION</b><p>You get a kickoff date within a week. Work happens against agreed scope only — written authorization required.</p></div>
+      <div class="step"><b>03 — THE REPORT</b><p>Findings ranked by real risk, with PoCs and exact fixes. Business summary for your founders.</p></div>
+      <div class="step"><b>04 — RETEST</b><p>You fix, I verify. Retest included. You end up secure, not just informed.</p></div>
+    </div>
+    <div class="trust">
+      <span>CEH v13 CERTIFIED</span><span>B.Tech IT + MBA</span><span>AUTOMATION ENGINEER (SME) @ OSI</span><span>BUILDER OF SEC-FRAME</span>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <h2>// start here</h2>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="c6704ec4-1860-4818-96ae-e79cbee06b51">
+      <input type="hidden" name="subject" value="💼 New services inquiry">
+      <label>&gt; name</label><input type="text" name="name" required>
+      <label>&gt; work email</label><input type="email" name="email" required>
+      <label>&gt; what do you need?</label>
+      <select name="service">
+        <option>DAST in CI/CD pipeline</option>
+        <option>Web app VAPT</option>
+        <option>Security automation consulting</option>
+        <option>Not sure — help me scope it</option>
+      </select>
+      <label>&gt; tell me about your app / company</label>
+      <textarea name="message" rows="5" required placeholder="e.g. React + Node app, ~5k users, deploying weekly on GitHub Actions..."></textarea>
+      <button type="submit" class="btn">[ REQUEST SCOPING CALL ]</button>
+    </form>
+    <p style="margin-top:26px;font-size:.78rem;color:var(--muted)">
+      Prefer email? <a href="mailto:youmailbakhtiar@gmail.com" style="color:var(--green)">youmailbakhtiar@gmail.com</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  All testing performed against explicitly authorized targets only, with written permission.<br>
+  © 2025 Shaik Abdul Bakhtiar · exploitablyyours
+</footer>
+
+</body>
+</html>
