@@ -1,6 +1,5 @@
 ---
 title: How I Built a Live Browser Security Scanner in Vanilla 
-JavaScriptdate: 2025-12-16
 summary: What checking your own browser taught me about fingerprinting, k-anonymity, and earning user trust — zero libraries, everything client-side.
 tags: javascript, browser-security, privacy, learning-in-public
 ---

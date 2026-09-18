@@ -1,6 +1,5 @@
 ---
 title: AI × Cybersecurity: How Attackers and Defenders Are Both Using AI Right Now
-date: 2025-12-16
 summary: Deepfake fraud, prompt injection, and an AI agent that found a real zero-day — what's actually documented, with sources you can check yourself.
 tags: ai, llm, cybersecurity, career, learning-in-public
 ---
