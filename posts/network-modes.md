@@ -1,6 +1,7 @@
 ---
 title: "NAT vs Host-only vs Bridged: What Each One Actually Does (Tested, Not Just Read)"
 summary: "Every VM has a network mode, and most beginners pick one because a tutorial said so. Here's what NAT, Host-only, and Bridged actually do under the hood — with the commands to prove each claim on your own machine."
+date: 2026-09-18
 tags: [networking, beginners, lab-setup, virtualization, learning-in-public]
 ---
 

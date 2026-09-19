@@ -1,6 +1,7 @@
 ---
 title: "Where Do VMs Get Their IPs? The Question Every Security Beginner Asks"
 summary: "You booted Kali, ran ip a, and saw an IP you never set. Where did it come from? NAT, DHCP, reverse shells, and the receptionist analogy — everything a first lab needs, minus the jargon."
+date: 2026-09-18
 tags: [networking, beginners, lab-setup, virtualization, learning-in-public]
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Building SEC-FRAME — Recon, Scan and Report in One Pipeline
 summary: What building the v0.1 pipeline taught me about parsing, failure modes and designing for what comes next.
+date: 2026-09-02
 tags: security-automation, python, secframe, learning-in-public
 ---
 **The problem: security checks lived outside my automation**
