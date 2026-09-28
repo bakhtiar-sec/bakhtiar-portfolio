@@ -9,8 +9,6 @@ tags: ai, shadow-ai, data-security, workplace
 
 *78% of AI users bring their own AI to work. Nobody approved it, nobody secures it, and banning it doesn't work.*
 
-78% of AI users bring their own AI to work. Nobody approved it, nobody secures it, and banning it doesn't work. Here's what's really happening on your team, and what to do about it.
-
 Most companies think they have an AI policy. What they actually have is an AI assumption: that employees are using the tools IT approved. The data says otherwise, and the gap between the two is where the risk lives.
 
 ## What it is
