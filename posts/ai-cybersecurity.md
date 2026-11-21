@@ -3,6 +3,9 @@ title: AI × Cybersecurity: How Attackers and Defenders Are Both Using AI Right 
 summary: Deepfake fraud, prompt injection, and an AI agent that found a real zero-day — what's actually documented, with sources you can check yourself.
 date: 2026-09-20
 tags: ai, llm, cybersecurity, career, learning-in-public
+image: https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=85
+image_alt: Cybersecurity operations backdrop with code and network systems
+image_position: center 42%
 ---
 
 **The problem: too much hype, not enough receipts**
